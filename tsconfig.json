@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "strict": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "composite": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist",
+  },
+  "exclude": [
+    "./template",
+    "./dist"
+  ]
+}
