@@ -1,0 +1,42 @@
+{
+  "name": "create-kotori",
+  "description": "An easy way to start a Kotori project",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "author": "Hotaru <biyuehuya@gmail.com>",
+  "scripts": {
+    "build": "tsc --build",
+    "lint": "eslint \"src/*.{ts,tsx}\" --fix",
+    "format": "prettier --config .prettierrc \"src/*.ts\" --write"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "dist",
+    "bin.js",
+    "res",
+    "template",
+    "locales"
+  ],
+  "bin": {
+    "create-kotori": "./bin.js"
+  },
+  "devDependencies": {
+    "@kotori-bot/i18n": "^1.2.0",
+    "@types/inquirer": "^9.0.7",
+    "@types/shelljs": "^0.8.15",
+    "@types/node": "^20.8.7",
+    "cac": "^6.7.14",
+    "colorette": "^2.0.20",
+    "eslint": "^8.47.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-typescript": "^3.0.0",
+    "inquirer": "^9.2.12",
+    "prettier": "^3.0.2",
+    "shelljs": "^0.8.5"
+  },
+  "engines": {
+    "node": ">=16.20.0"
+  }
+}

@@ -1,0 +1,16 @@
+node_modules
+dist
+lib
+.husky/_
+
+.vscode/*
+.vs/*
+!.vscode/extensions.json
+
+*.tgz
+tsconfig.tsbuildinfo
+*.log
+
+kotori.dev.yml
+
+data

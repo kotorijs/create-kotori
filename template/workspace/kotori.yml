@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://kotori.js.org/schema/1.3.0.json
+global:
+  port: 720
+  lang: zh_CN
+  command-prefix: /
+  dirs:
+    - ./node_modules/
+    - ./node_modules/@kotori-bot/
+    - ./project/
+
+adapter:
+  cmd-test:
+    extends: cmd
+    master: 2333
+    nickname: Kotarou
+    age: 18
+    sex: male
+    self-id: 720
+
+  mizuki:
+    extends: sandbox
+    master: 2333333
+    port: 233
+
+plugin:
+  webui:
+    username: himeno
+    password: '0517'
