@@ -1,6 +1,12 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join, resolve } from 'path';
-import { DEFAULT_PROJECT_AUTHOR, DEFAULT_PROJECT_DESCRIPTION, DEFAULT_PROJECT_NAME } from './const';
+import {
+  DEFAULT_PROJECT_AUTHOR,
+  DEFAULT_PROJECT_DESCRIPTION,
+  DEFAULT_PROJECT_NAME,
+  DEFAULT_VERSION,
+  UPDATE_URL
+} from './const';
 import shell from 'shelljs';
 import { blue, green, red, white, yellow } from 'colorette';
 
@@ -61,8 +67,13 @@ export default async function () {
   const workspacePkgDir = join(dir, 'package.json');
   const pkgDir = join(projectDir, 'package.json');
   const readmeDir = join(projectDir, 'README.md');
+  const update = await (await fetch(UPDATE_URL)).json();
+  const newVersion = update && update.version ? `^${update.version}` : DEFAULT_VERSION;
 
-  writeFileSync(workspacePkgDir, readFileSync(workspacePkgDir).toString().replace('AUTHOR', projectAuthor));
+  writeFileSync(workspacePkgDir, readFileSync(workspacePkgDir).toString()
+    .replace('AUTHOR', projectAuthor)
+    .replace(DEFAULT_VERSION, newVersion)
+  );
   writeFileSync(
     pkgDir,
     readFileSync(pkgDir)
@@ -70,6 +81,7 @@ export default async function () {
       .replace('NAME', projectName)
       .replace('DESCRIPTION', projectDescription)
       .replace('AUTHOR', projectAuthor)
+      .replace(DEFAULT_VERSION, newVersion)
   );
   writeFileSync(
     readmeDir,
