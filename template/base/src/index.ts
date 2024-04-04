@@ -1,4 +1,4 @@
-import { Context, ModuleConfig, Tsu } from 'kotori-bot';
+import { Context, none, Tsu } from 'kotori-bot';
 
 export const lang = [__dirname, '../locales'];
 
@@ -13,6 +13,8 @@ type Config = Tsu.infer<typeof config>;
 export const inject = ['database'];
 
 export function main(ctx: Context, config: Config) {
+  none(config);
+
   ctx.on('ready', async () => {
     if (await ctx.db.schema.hasTable('test')) return;
     await ctx.db.schema.createTable('test', (table) => {
