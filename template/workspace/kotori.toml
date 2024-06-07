@@ -1,0 +1,26 @@
+[global]
+level = 20
+port = 720
+lang = "zh_CN"
+command-prefix = "/"
+dirs = ["./node_modules/", "./node_modules/@kotori-bot/"]
+
+[adapter.cmd-test]
+extends = "cmd"
+master = "2333"
+nickname = "Kotarou"
+age = 18
+sex = "male"
+self-id = 2333
+
+[adapter.mizuki]
+extends = "sandbox"
+master = 10101
+port = 233
+
+[plugin.helper]
+content = "请发送 /help"
+
+[plugin.filter]
+mode = 'exclude'
+list = []

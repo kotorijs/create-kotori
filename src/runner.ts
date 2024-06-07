@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { join, resolve } from 'path';
+import { resolve } from 'path';
 import {
   DEFAULT_PROJECT_AUTHOR,
   DEFAULT_PROJECT_DESCRIPTION,
@@ -16,7 +16,7 @@ export default async function () {
 
   shell.echo(blue(`KotoriBot - Cross-platform Chatbot Framework`));
 
-  const { projectNameOrigin, projectDescription, projectAuthor, isGit } = await prompt([
+  const { projectNameOrigin, projectDescription, projectAuthor, projectStyle, initializeGit } = await prompt([
     {
       type: 'input',
       name: 'projectNameOrigin',
@@ -37,55 +37,86 @@ export default async function () {
     },
     {
       type: 'confirm',
-      name: 'isGit',
+      name: 'projectStyle',
+      message: 'Do you want to use decorators style',
+      default: true
+    },
+    {
+      type: 'confirm',
+      name: 'initializeGit',
       message: 'Do you want to create a git repository',
       default: true
     }
   ]);
 
-  const projectName = String(projectNameOrigin).replaceAll(' ', '-');
-  const dir = resolve(process.cwd(), projectName);
-  const projectDir = join(dir, './project', projectName);
+  const projectName = String(projectNameOrigin).trim().toLocaleLowerCase().replaceAll(' ', '-');
+  const workspaceDir = resolve(process.cwd(), projectName);
+  const modulesDir = resolve(workspaceDir, './modules', projectName);
 
   /* check root dir */
-  if (existsSync(dir)) {
+  if (existsSync(workspaceDir)) {
     shell.echo(red('Error: dir already existed'));
     shell.exit();
   }
 
-  shell.echo(white(`Workspace project in ${dir}`));
+  shell.echo(white(`Workspace project in ${workspaceDir}`));
 
   /* copy dirs  */
-  shell.cp('-r', resolve(__dirname, '../template/workspace'), dir);
-  shell.cd(dir);
-  shell.cp('-r', resolve(__dirname, '../template/base'), projectDir);
+  shell.cp('-r', resolve(__dirname, '../template/workspace'), workspaceDir);
+  shell.cat(resolve(workspaceDir, 'kotori.toml')).to(resolve(workspaceDir, 'kotori.dev.toml'));
+  shell.rm('-f', resolve(workspaceDir, 'kotori.toml'));
+  shell.mkdir(resolve(workspaceDir, './modules'));
+  shell.cp('-r', resolve(__dirname, '../template/base'), modulesDir);
+  shell
+    .cat(resolve(modulesDir, `src/index_${projectStyle ? 'decorators' : 'exports'}.ts`))
+    .to(resolve(modulesDir, `src/index.ts`));
+  shell.rm('-f', resolve(modulesDir, 'src/index_*.ts'));
 
   /* initialize git repository */
-  if (isGit && shell.which('git')) shell.exec('git init');
+  if (initializeGit) {
+    if (shell.which('git')) {
+      shell.exec('git init');
+    } else {
+      shell.echo(yellow('Git not found, skip git repository initialization'));
+    }
+  }
+
+  /* get latest version */
+  let targetVersion = DEFAULT_VERSION;
+  try {
+    const update = await (await fetch(UPDATE_URL)).json().catch(() => null);
+    targetVersion = update && update.version ? `^${update.version}` : DEFAULT_VERSION;
+  } catch {
+    shell.echo(red('Failed to get latest version please check your internet connection, use default version'));
+  }
 
   /* generate files */
-  const workspacePkgDir = join(dir, 'package.json');
-  const pkgDir = join(projectDir, 'package.json');
-  const readmeDir = join(projectDir, 'README.md');
-  const update = await (await fetch(UPDATE_URL)).json();
-  const newVersion = update && update.version ? `^${update.version}` : DEFAULT_VERSION;
+  const workspacePkgFile = resolve(workspaceDir, 'package.json');
+  const modulePkgFile = resolve(modulesDir, 'package.json');
+  const moduleReadmeFile = resolve(modulesDir, 'README.md');
 
-  writeFileSync(workspacePkgDir, readFileSync(workspacePkgDir).toString()
-    .replace('AUTHOR', projectAuthor)
-    .replace(DEFAULT_VERSION, newVersion)
-  );
   writeFileSync(
-    pkgDir,
-    readFileSync(pkgDir)
+    workspacePkgFile,
+    readFileSync(workspacePkgFile)
       .toString()
-      .replace('NAME', projectName)
-      .replace('DESCRIPTION', projectDescription)
-      .replace('AUTHOR', projectAuthor)
-      .replace(DEFAULT_VERSION, newVersion)
+      .replace('module-author', projectAuthor)
+      .replace(DEFAULT_VERSION, targetVersion)
   );
   writeFileSync(
-    readmeDir,
-    readFileSync(readmeDir).toString().replace('NAME', projectName).replace('DESCRIPTION', projectDescription)
+    modulePkgFile,
+    readFileSync(modulePkgFile)
+      .toString()
+      .replace('module-name', projectName)
+      .replace('module-description', projectDescription)
+      .replace('module-author', projectAuthor)
+      .replace(DEFAULT_VERSION, targetVersion)
+  );
+  writeFileSync(
+    moduleReadmeFile,
+    readFileSync(moduleReadmeFile)
+      .toString()
+      .replaceAll('module-name', projectName)
+      .replaceAll('module-description', projectDescription)
   );
 
   /* ending */

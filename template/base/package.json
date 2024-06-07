@@ -1,11 +1,8 @@
 {
-  "name": "kotori-plugin-NAME",
+  "name": "kotori-plugin-module-name",
   "version": "1.0.0",
-  "description": "DESCRIPTION",
+  "description": "module-description",
   "main": "lib/index.js",
-  "scripts": {
-    "build": "tsc"
-  },
   "keywords": [
     "kotori",
     "chatbot",
@@ -18,18 +15,8 @@
     "LICENSE",
     "README.md"
   ],
-  "author": "AUTHOR",
+  "author": "module-author",
   "peerDependencies": {
-    "kotori-bot": "^1.3.0"
-  },
-  "kotori": {
-    "meta": {
-      "language": [
-        "en_US",
-        "ja_JP",
-        "zh_TW",
-        "zh_CN"
-      ]
-    }
+    "kotori-bot": "^1.5.3"
   }
 }

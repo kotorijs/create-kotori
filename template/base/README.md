@@ -1,6 +1,6 @@
-# kotori-plugin-NAME
+# kotori-plugin-module-name
 
-DESCRIPTION
+module-description
 
 ## Config
 
