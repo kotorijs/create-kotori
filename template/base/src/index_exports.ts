@@ -3,9 +3,9 @@ import { Context, none, Tsu } from 'kotori-bot';
 export const lang = [__dirname, '../locales'];
 
 export const config = Tsu.Object({
-  config1: Tsu.Number().range(0, 10),
-  config2: Tsu.Boolean(),
-  config3: Tsu.Union([Tsu.Literal('on'), Tsu.Literal('off')])
+  config1: Tsu.Number().range(0, 10).default(0),
+  config2: Tsu.Boolean().default(false),
+  config3: Tsu.Union([Tsu.Literal('on'), Tsu.Literal('off')]).default('off')
 });
 
 type Config = Tsu.infer<typeof config>;
@@ -16,11 +16,7 @@ export function main(ctx: Context, config: Config) {
   none(config);
 
   ctx.on('ready', async () => {
-    if (await ctx.db.schema.hasTable('test')) return;
-    await ctx.db.schema.createTable('test', (table) => {
-      table.increments();
-      table.string('name');
-    });
+    /* ... */
   });
 
   ctx.on('on_group_decrease', (session) => {

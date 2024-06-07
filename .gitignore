@@ -8,16 +8,5 @@ lib
 !.vscode/extensions.json
 
 *.tgz
-tsconfig.tsbuildinfo
 *.log
-
-kotori.dev.yml
-
-# modules/*
-!modules/adapter-*
-!modules/core
-!modules/helper
-!modules/i18n-command
-!modules/menu
-
-data
+tsconfig.tsbuildinfo

@@ -1,14 +1,7 @@
-const { join } = require('path');
-const { ls, exec, cd } = require('shelljs');
+#!/usr/bin/env tsx
 
-const rootDir = join(__dirname, '../node_modules/.pnpm');
-const list = ls(rootDir);
+import { Loader } from 'kotori-bot';
+import { resolve } from 'node:path';
 
-if (list.stderr) {
-  console.error(`Cannot find dir ${rootDir}, please reinstall packages.`);
-  process.exit();
-}
-
-const kotoriDir = list.find((dir) => dir.startsWith('kotori-bot@'));
-cd(join(rootDir, kotoriDir, './node_modules/kotori-bot'));
-exec('pnpm start');
+const kotori = new Loader({ mode: 'dev', dir: resolve(__dirname, '../')  });
+kotori.run();

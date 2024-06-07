@@ -8,9 +8,10 @@ lib
 !.vscode/extensions.json
 
 *.tgz
-tsconfig.tsbuildinfo
 *.log
+tsconfig.tsbuildinfo
+test.http
+kotori.dev.*
 
-kotori.dev.yml
-
-data
+log/*
+data/*
