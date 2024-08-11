@@ -6,15 +6,14 @@
     "strict": true,
     "declaration": true,
     "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
     "composite": true,
     "incremental": true,
     "baseUrl": ".",
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": "./dist"
   },
-  "exclude": [
-    "./template",
-    "./my-project",
-    "./dist"
-  ]
+  "exclude": ["./template", "./my-project", "./dist"]
 }

@@ -1,0 +1,14 @@
+node_modules
+dist
+lib
+coverage
+log
+data
+
+*.env
+*.tgz
+*.log
+tsconfig.tsbuildinfo
+test.http
+
+kotori.dev.*

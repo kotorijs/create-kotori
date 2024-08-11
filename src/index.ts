@@ -1,13 +1,11 @@
-import { cac } from 'cac';
-import { readFileSync } from 'fs';
-import runner from './runner';
+import { cac } from 'cac'
+import runner from './runner'
 
-const program = cac();
+const program = cac()
 
-const { version } = JSON.parse(readFileSync(`${__dirname}/../package.json`).toString());
-program.version(version, '-v, --version');
-program.help();
+program.version(require('../package.json').version, '-v, --version')
+program.help()
 
-program.command('').action(() => runner().then());
+program.command('').action(() => runner().then())
 
-program.parse();
+program.parse()
