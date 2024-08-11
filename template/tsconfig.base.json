@@ -11,9 +11,9 @@
     "noImplicitReturns": true,
     "composite": true,
     "incremental": true,
-    "baseUrl": ".",
-    "rootDir": "./src",
-    "outDir": "./dist"
+    /* Custom */
+    "emitDeclarationOnly": true
   },
-  "exclude": ["./template", "./my-project", "./dist"]
+  /* Custom */
+  "exclude": ["**/*/*.test.ts", "*.d.ts", "**/*/lib/*", "**/*/dist/*"]
 }

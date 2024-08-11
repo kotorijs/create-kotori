@@ -2,6 +2,14 @@
 
 Hi there! This is the workspace for your project.
 
+If you were generated from github template repository,you need:
+
+1. Update `package.json`: `npm update -f`
+2. Choose a plugin style between decorators and exports in `modules/my-project` directory,and rename target file,remove
+other file
+3. Update some information at `package.json`,`modules/my-project`,`modules/my-project/package.json` such as
+plugin name,folders name,author name,description and so on
+
 ## Usage
 
 ### Development

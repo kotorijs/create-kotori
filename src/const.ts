@@ -1,10 +1,11 @@
-export const DEFAULT_PROJECT_NAME = 'my-project';
+export const DEFAULT_PROJECT_NAME = 'my-project'
 
-export const DEFAULT_PROJECT_DESCRIPTION = 'a kotori project kotori project';
+export const DEFAULT_PROJECT_DESCRIPTION = 'a kotori project kotori project'
 
-export const DEFAULT_PROJECT_AUTHOR = 'Anonymous';
+export const DEFAULT_PROJECT_AUTHOR = 'Anonymous'
 
-export const DEFAULT_VERSION = '^1.5.3';
+export const TEMPLATE_REPO = 'git@github.com:kotorijs/plugin-workspace-template.git'
 
-export const UPDATE_URL =
-  'https://hotaru.icu/api/agent/?url=https://raw.githubusercontent.com/kotorijs/kotori/master/packages/kotori/package.json';
+export const TEMPLATE_REPO_NAME = 'plugin-workspace-template'
+
+export const DEPS_URL = 'https://kotori.js.org/assets/deps.json'
