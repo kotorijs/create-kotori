@@ -3,7 +3,7 @@ port = 720
 dbPrefix = "romiChan"
 lang = "zh_CN"
 commandPrefix = "/"
-dirs = []
+dirs = ["modules", "node_modules", "node_modules/@kotori-bot"]
 noColor = false
 level = 20
 
@@ -17,3 +17,6 @@ self-id = 720
 
 [plugin.helper]
 content = "test menu"
+
+[build]
+banner = "/**\n* @Package %name%\n* @Version %version%\n* @Author %author%\n* @License %license%\n* @Date %date%\n*/"
