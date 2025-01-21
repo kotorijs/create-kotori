@@ -15,5 +15,5 @@
     "rootDir": "./src",
     "outDir": "./dist"
   },
-  "exclude": ["./template", "./my-project", "./dist"]
+  "include": ["src"]
 }

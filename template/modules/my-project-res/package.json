@@ -1,0 +1,32 @@
+{
+  "name": "kotori-plugin-my-project-res",
+  "version": "1.0.0",
+  "description": "a kotori project kotori project by rescript",
+  "main": "src/Main.res.js",
+  "scripts": {
+    "res:build": "rescript",
+    "res:clean": "rescript clean",
+    "res:dev": "rescript -w"
+  },
+  "keywords": [
+    "kotori",
+    "chatbot",
+    "kotori-plugin",
+    "rescript"
+  ],
+  "license": "BAN-ZHINESE-USING",
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "author": "Anonymous",
+  "peerDependencies": {
+    "kotori-bot": "^1.7.1"
+  },
+  "dependencies": {
+    "rescript-kotori": "^1.0.0",
+    "rescript": "11.1.4",
+    "@rescript/core": "^1.6.1"
+  }
+}

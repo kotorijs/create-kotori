@@ -3,12 +3,17 @@ dist
 lib
 coverage
 log
+cache
+temp
 data
+data.db
 
 *.env
+.env
 *.tgz
 *.log
 tsconfig.tsbuildinfo
 test.http
 
 kotori.dev.*
+*.res.js
