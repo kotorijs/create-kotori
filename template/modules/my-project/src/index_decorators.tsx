@@ -1,59 +1,54 @@
-import { type Context, none, Tsu } from 'kotori-bot'
+import { Tsu, type CommandAction, plugins, KotoriPlugin, UserAccess, type SessionMsg } from 'kotori-bot'
 
-export const lang = [__dirname, '../locales']
+const plugin = plugins([__dirname, '../'])
 
-export const config = Tsu.Object({
-  config1: Tsu.Number().range(0, 10).default(0),
-  config2: Tsu.Boolean().default(false),
-  config3: Tsu.Union(Tsu.Literal('on'), Tsu.Literal('off')).default('off')
-})
+@plugin.import
+export class YourPlugin extends KotoriPlugin<Tsu.infer<typeof YourPlugin.schema>> {
+  @plugin.schema
+  public static schema = Tsu.Object({
+    config1: Tsu.Number().range(0, 10).default(0),
+    config2: Tsu.Boolean().default(false),
+    config3: Tsu.Union(Tsu.Literal('on'), Tsu.Literal('off')).default('off')
+  })
 
-type Config = Tsu.infer<typeof config>
+  @plugin.inject
+  public static inject = ['database']
 
-export const inject = ['database']
-
-export function main(ctx: Context, config: Config) {
-  none(config)
-
-  ctx.on('ready', async () => {
+  @plugin.on({ type: 'ready' })
+  public async onReady() {
     /* ... */
-  })
+  }
 
-  ctx.on('on_group_decrease', (session) => {
-    session.quick(
-      session.userId === session.operatorId ? (
-        <seg>
-          <mention userId={session.userId} />
-          默默的退出了群聊
-        </seg>
-      ) : (
-        <seg>
-          <mention userId={session.userId} />被<mention userId={session.operatorId} />
-          制裁了
-        </seg>
-      )
-    )
-  })
-
-  ctx.midware((next, session) => {
+  @plugin.midware({ priority: 10 })
+  public async midware(next: () => void, session: SessionMsg) {
     const s = session
     if (s.message.startsWith('/说') || s.message.includes('/说')) {
       s.message = `${s.api.adapter.config['command-prefix']}echo`
     }
     next()
-  }, 10)
+  }
 
-  ctx
-    .command('echo <content> [num:number=3]')
-    .action((data) => {
-      ctx.logger.debug(data, data.args[0])
-      return (
-        <format template="返回消息：{0}">
-          <text>{data.args[0]}</text>
-        </format>
-      )
-    })
-    .alias('print')
+  @plugin.command({
+    template: 'echo <content> [num:number=3]',
+    access: UserAccess.ADMIN,
+    options: [['I', 'interactive:boolean']]
+  })
+  public async echo({ args }: Parameters<CommandAction>[0], _session: SessionMsg) {
+    this.ctx.logger.debug(args)
+    return (
+      <format template="返回消息：{0}">
+        <text>{args[0] as string}</text>
+      </format>
+    )
+  }
 
-  ctx.regexp(/^(.*)#print$/, (match) => match[1])
+  @plugin.regexp({ match: /^(.*)#print$/ })
+  public static print(match: RegExpExecArray) {
+    return match[1]
+  }
+
+  @plugin.task({ cron: '0/10 * * * * *' })
+  public task() {
+    this.ctx.logger.info('task run!')
+  }
 }
