@@ -11,9 +11,10 @@
     "noImplicitReturns": true,
     "composite": true,
     "incremental": true,
-    "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

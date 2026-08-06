@@ -36,7 +36,7 @@ This will publish the project to npm.
 
 ## License
 
-Licensed under the BCU license.
+Licensed under the GPL-3.0 license.
 
 ## Reference
 

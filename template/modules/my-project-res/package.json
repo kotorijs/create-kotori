@@ -14,7 +14,7 @@
     "kotori-plugin",
     "rescript"
   ],
-  "license": "BAN-ZHINESE-USING",
+  "license": "GPL-3.0-only",
   "files": [
     "src",
     "LICENSE",
@@ -22,11 +22,11 @@
   ],
   "author": "Anonymous",
   "peerDependencies": {
-    "kotori-bot": "^1.7.1"
+    "kotori-bot": "^1"
   },
   "dependencies": {
-    "rescript-kotori": "^1.0.0",
-    "rescript": "11.1.4",
-    "@rescript/core": "^1.6.1"
+    "rescript-kotori": "^1",
+    "rescript": "11",
+    "@rescript/core": "^1"
   }
 }

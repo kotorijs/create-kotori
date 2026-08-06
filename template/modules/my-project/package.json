@@ -8,7 +8,7 @@
     "chatbot",
     "kotori-plugin"
   ],
-  "license": "BAN-ZHINESE-USING",
+  "license": "GPL-3.0-only",
   "files": [
     "lib",
     "locales",
@@ -17,6 +17,6 @@
   ],
   "author": "Anonymous",
   "peerDependencies": {
-    "kotori-bot": "^1.6.3"
+    "kotori-bot": "^1"
   }
 }
