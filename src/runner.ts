@@ -47,8 +47,9 @@ export default async function () {
     .cat(resolve(modulesDir, `src/index_${projectStyle ? 'decorators' : 'exports'}.tsx`))
     .to(resolve(modulesDir, 'src/index.tsx'))
   shell.rm('-f', resolve(modulesDir, 'src/index_*.tsx'))
-
+  shell.cd(workspaceDir)
   shell.exec('git init')
+  shell.cd('../')
   ;((deps) =>
     [
       resolve(workspaceDir, 'package.json'),
