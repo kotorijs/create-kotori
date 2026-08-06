@@ -1,0 +1,64 @@
+{
+  "name": "kotori-plugin-workspace",
+  "description": "kotori plugin workspace project",
+  "version": "1.0.0",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "author": "Anonymous",
+  "scripts": {
+    "serve": "kotori",
+    "build": "tsx build --types --ignoreError",
+    "dev:only": "tsx build --silent && kotori",
+    "dev": "nodemon --watch",
+    "pub": "pnpm -r publish --no-git-checks --access public"
+  },
+  "files": [
+    "{packages,modules}/**/*/locales/**/*",
+    "{packages,modules}/**/*/{src,lib,dist}/**/*.js",
+    "{packages,modules}/**/*/{package.json,LICENSE,README.md}",
+    "README.md",
+    "LICENSE",
+    "pnpm-workspace.yaml",
+    "kotori.*"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "2.5.7",
+    "@types/node": "^26",
+    "nodemon": "^3",
+    "tsup": "^8",
+    "tsx": "^4",
+    "typescript": "^7"
+  },
+  "packageManager": "pnpm@8.7.4+",
+  "engines": {
+    "node": ">=17.9.0"
+  },
+  "nodemonConfig": {
+    "exec": "pnpm dev:only",
+    "ext": "ts,tsx",
+    "ignore": [
+      "dist",
+      "lib",
+      "data",
+      "log",
+      "tsup.config.*",
+      "scripts",
+      "tests",
+      "*.dts",
+      "*.test.ts"
+    ]
+  },
+  "dependencies": {
+    "@kotori-bot/kotori-plugin-access": "^1",
+    "@kotori-bot/kotori-plugin-adapter-cmd": "^1",
+    "@kotori-bot/kotori-plugin-adapter-sandbox": "^1",
+    "@kotori-bot/kotori-plugin-alias": "^1",
+    "@kotori-bot/kotori-plugin-core": "^1",
+    "@kotori-bot/kotori-plugin-filter": "^1",
+    "@kotori-bot/kotori-plugin-helper": "^1",
+    "@kotori-bot/kotori-plugin-status": "^1",
+    "@kotori-bot/kotori-plugin-webui": "^1",
+    "kotori-bot": "^1",
+    "kotori-plugin-requester": "^1"
+  }
+}

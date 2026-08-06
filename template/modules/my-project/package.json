@@ -1,0 +1,22 @@
+{
+  "name": "kotori-plugin-my-project",
+  "version": "1.0.0",
+  "description": "a kotori project kotori project",
+  "main": "lib/index.js",
+  "keywords": [
+    "kotori",
+    "chatbot",
+    "kotori-plugin"
+  ],
+  "license": "GPL-3.0-only",
+  "files": [
+    "lib",
+    "locales",
+    "LICENSE",
+    "README.md"
+  ],
+  "author": "Anonymous",
+  "peerDependencies": {
+    "kotori-bot": "^1"
+  }
+}
